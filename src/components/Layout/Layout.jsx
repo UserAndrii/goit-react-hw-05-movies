@@ -2,7 +2,14 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
-import { Container, LinkLogo, Header, Nav, Link } from './Layout.styled';
+import {
+  Container,
+  LinkLogo,
+  Header,
+  Nav,
+  Link,
+  LogoIcon,
+} from './Layout.styled';
 import Loader from '../Loader';
 
 const Layout = () => {
@@ -10,7 +17,9 @@ const Layout = () => {
     <Container>
       <Header>
         <Nav>
-          <LinkLogo to="/">Filmoteka</LinkLogo>
+          <LinkLogo to="/">
+            <LogoIcon /> MovieMagnet
+          </LinkLogo>
           <div>
             <Link to="/" style={{ marginRight: 10 }}>
               Home

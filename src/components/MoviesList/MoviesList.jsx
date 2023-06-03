@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import MoviesListItem from '../MoviesListItem';
 import { List } from './MoviesList.styled';
@@ -7,7 +8,7 @@ const MoviesList = ({ movies }) => {
     <List>
       {movies.map(({ id, title, name, poster_path }) => (
         <MoviesListItem
-          key={id}
+          key={nanoid(5)}
           id={id}
           title={title}
           name={name}

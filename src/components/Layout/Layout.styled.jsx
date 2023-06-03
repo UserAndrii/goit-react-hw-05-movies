@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { GiFilmSpool } from 'react-icons/gi';
 import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -15,18 +16,23 @@ export const Header = styled.header`
 `;
 
 export const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
+  text-align: center;
+
+  @media screen and (min-width: 460px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+  }
 `;
 
 export const Link = styled(NavLink)`
   padding: 8px 16px;
+  display: inline-block;
   border-radius: 4px;
+  font-weight: 500;
   text-decoration: none;
   color: black;
-  font-weight: 500;
   border: 1px solid coral;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -43,9 +49,24 @@ export const Link = styled(NavLink)`
 `;
 
 export const LinkLogo = styled(NavLink)`
+  margin-bottom: 30px;
+  display: inline-block;
   font-weight: 500;
   font-size: 26px;
   line-height: 1.19;
   color: coral;
   text-decoration: none;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: 460px) {
+    margin-bottom: 0;
+  }
+`;
+
+export const LogoIcon = styled(GiFilmSpool)`
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    color: coral;
+  }
 `;

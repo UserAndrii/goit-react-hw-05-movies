@@ -7,9 +7,12 @@ import { fetchSearchMovies } from '../API';
 import Section from 'components/Section/Section';
 import MoviesList from 'components/MoviesList/MoviesList';
 import HandleError from 'components/HandleError/HandleError';
+import LoadMoreBtn from 'components/LoadMoreBtn/LoadMoreBtn';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
+  const [pages, setPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(false);
 
@@ -24,9 +27,13 @@ const MoviesPage = () => {
 
     const fetchMovies = async () => {
       try {
-        const response = await fetchSearchMovies(searchValue);
-        if (response.length === 0) setError(true);
-        setMovies(response);
+        const response = await fetchSearchMovies(searchValue, pages);
+        const { results, total_pages } = response;
+
+        if (results.length === 0) setError(true);
+
+        setMovies(prev => [...prev, ...results]);
+        setTotalPages(total_pages);
       } catch (error) {
         setError(true);
         console.error(error.message);
@@ -34,9 +41,12 @@ const MoviesPage = () => {
     };
 
     fetchMovies();
-  }, [searchParams]);
+  }, [pages, searchParams]);
 
   const handleFormSubmit = value => {
+    setMovies([]);
+    setPages(1);
+    setTotalPages(1);
     if (value === searchParams.get('query')) {
       return toast.error(
         'You have already searched for this keyword. Please try another one.'
@@ -51,6 +61,9 @@ const MoviesPage = () => {
       {movies.length > 0 && (
         <Section title="List of movies by keyword:">
           <MoviesList movies={movies} />
+          {pages < totalPages && (
+            <LoadMoreBtn onClick={() => setPages(prev => prev + 1)} />
+          )}
         </Section>
       )}
       {error && <HandleError />}

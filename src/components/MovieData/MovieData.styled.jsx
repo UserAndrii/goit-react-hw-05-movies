@@ -2,14 +2,24 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Image = styled.img`
+  @media screen and (max-width: 350px) {
+    max-width: 200px;
+    height: auto;
+  }
   max-width: 300px;
+  height: auto;
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
+  text-align: center;
   padding: 15px 20px;
-  gap: 40px;
   border-bottom: 2px solid coral;
+
+  @media screen and (min-width: 690px) {
+    text-align: left;
+    display: flex;
+    gap: 40px;
+  }
 `;
 
 export const InfoBlock = styled.div`
